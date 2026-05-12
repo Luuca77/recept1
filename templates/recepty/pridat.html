@@ -1,0 +1,14 @@
+{% extends 'recepty/base.html' %}
+
+{% block title %}Přidat recept{% endblock %}
+
+{% block content %}
+    <h1>➕ Přidat recept</h1>
+    <div class="form-container">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary">Uložit recept</button>
+        </form>
+    </div>
+{% endblock %}

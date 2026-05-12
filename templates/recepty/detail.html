@@ -1,0 +1,30 @@
+{% extends 'recepty/base.html' %}
+
+{% block title %}{{ recept.nazev }}{% endblock %}
+
+{% block content %}
+    <a href="{% url 'seznam' %}" class="btn btn-secondary">← Zpět</a>
+    <br><br>
+    <div class="detail-container">
+        {% if recept.fotka %}
+            <img src="{{ recept.fotka.url }}" alt="{{ recept.nazev }}">
+        {% endif %}
+        <h1>{{ recept.nazev }}</h1>
+
+        {% if user == recept.autor %}
+            <a href="{% url 'upravit' recept.pk %}" class="btn btn-secondary">✏️ Upravit</a>
+            <a href="{% url 'smazat' recept.pk %}" class="btn btn-primary">🗑️ Smazat</a>
+        {% endif %}
+
+        <div class="detail-meta">
+            <span>📂 {{ recept.kategorie }}</span>
+            <span>⏱️ {{ recept.doba_pripravy }} minut</span>
+            <span>🍽️ {{ recept.pocet_porci }} porcí</span>
+            <span>👤 {{ recept.autor }}</span>
+        </div>
+        <h3>Popis</h3>
+        <p>{{ recept.popis }}</p>
+        <h3>Postup</h3>
+        <p>{{ recept.postup|linebreaks }}</p> <! -- linebreak dá řádky na odstavce -->
+    </div>
+{% endblock %}

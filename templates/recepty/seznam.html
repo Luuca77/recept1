@@ -1,0 +1,26 @@
+{% extends 'recepty/base.html' %}
+
+{% block title %}Receptář – Seznam receptů{% endblock %}
+
+{% block content %}
+    <h1>{% if aktivni_kategorie %}{{ aktivni_kategorie.nazev }}{% else %}Všechny recepty{% endif %}</h1>
+
+    <div class="recepty-grid">
+        {% for recept in recepty %}
+            <div class="karta">
+                {% if recept.fotka %}
+                    <img src="{{ recept.fotka.url }}" alt="{{ recept.nazev }}">
+                {% endif %}
+                <div class="karta-obsah">
+                    <h2><a href="{% url 'detail' recept.pk %}">{{ recept.nazev }}</a></h2>
+                    <p>{{ recept.popis|truncatechars:80 }}</p>
+                    <div class="karta-meta">
+                        ⏱️ {{ recept.doba_pripravy }} min | 🍽️ {{ recept.pocet_porci }} porcí
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <p>Zatím žádné recepty. <a href="{% url 'pridat' %}">Přidej první!</a></p>
+        {% endfor %}
+    </div>
+{% endblock %}

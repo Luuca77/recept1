@@ -1,0 +1,16 @@
+{% extends 'recepty/base.html' %}
+
+{% block title %}Registrace{% endblock %}
+
+{% block content %}
+    <h1>📝 Registrace</h1>
+    <div class="form-container">
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary">Zaregistrovat se</button>
+        </form>
+        <br>
+        <p>Už máš účet? <a href="{% url 'prihlaseni' %}">Přihlas se</a></p>
+    </div>
+{% endblock %}

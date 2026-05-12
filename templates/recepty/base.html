@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Receptář{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+<nav>
+    <a href="{% url 'seznam' %}" class="logo">🍽️ Receptář</a>
+    <div>
+        {% if user.is_authenticated %}
+            Ahoj, {{ user.username }}!
+            <a href="{% url 'pridat' %}">➕ Přidat recept</a>
+            <a href="{% url 'odhlaseni' %}">Odhlásit se</a>
+        {% else %}
+            <a href="{% url 'prihlaseni' %}">Přihlásit se</a>
+            <a href="{% url 'registrace' %}">Registrace</a>
+        {% endif %}
+    </div>
+</nav>
+
+<div class="kategorie-nav">
+    <a href="{% url 'seznam' %}" class="kategorie-btn">Vše</a>
+    {% for kat in kategorie %}
+        <a href="{% url 'seznam' %}?kategorie={{ kat.id }}" class="kategorie-btn">{{ kat.nazev }}</a>
+    {% endfor %}
+</div>
+
+<div class="container">
+    {% block content %}
+    {% endblock %}
+</div>
+
+</body>
+</html>

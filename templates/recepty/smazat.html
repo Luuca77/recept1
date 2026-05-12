@@ -1,0 +1,16 @@
+{% extends 'recepty/base.html' %}
+
+{% block title %}Smazat recept{% endblock %}
+
+{% block content %}
+    <h1>🗑️ Smazat recept</h1>
+    <div class="form-container">
+        <p>Opravdu chceš smazat recept <strong>{{ recept.nazev }}</strong>?</p>
+        <br>
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-primary">Ano, smazat</button>
+            <a href="{% url 'detail' recept.pk %}" class="btn btn-secondary">Zrušit</a>
+        </form>
+    </div>
+{% endblock %}
