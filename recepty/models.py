@@ -21,11 +21,3 @@ class Recept(models.Model):
     def __str__(self):
         return self.nazev
 
-class Hodnoceni(models.Model):
-    recept = models.ForeignKey(Recept, on_delete=models.CASCADE, related_name='hodnoceni')
-    autor = models.ForeignKey(User, on_delete=models.CASCADE)
-    hvezdicky = models.IntegerField(choices=[(i, i) for i in range(1, 6)])
-    komentar = models.TextField(blank=True)
-
-    def __str__(self):
-        return f"{self.recept} - {self.hvezdicky}⭐"
